@@ -34,6 +34,8 @@ def read_METEO(filename, fakelines):
 	data = np.array(data)
 	data = data[:,1:]
 	data = data.astype(float)
+	times = data[:,0]
+	data[:,0] = [int(dt.datetime.strptime(x, '%Y%m%d%H%M').strftime("%s")) for x in data[:,0].astype(int).astype(str)]		
 	return data
 
 def reduce_data(data, r):
@@ -49,6 +51,8 @@ def reduce_data(data, r):
 		else:
 			newline = newline + data[k]
 	return data_red
+
+int(dt.datetime.strptime('01/12/2011', '%d/%m/%Y').strftime("%s"))
 
 '''
 data = read_CSV('OPC2_000.CSV', 16)+read_CSV('OPC2_001.CSV', 16)+read_CSV('OPC2_002.CSV', 16)
