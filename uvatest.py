@@ -29,13 +29,12 @@ def read_METEO(filename, fakelines):
 				if row == []:
 					break
 				newline = row[0].split(";")
-				newline[1:] = list(map(float, newline[1:]))
 				data.append(newline)
 			i = i + 1
 	data = np.array(data)
+	times = data[:,1]
 	data = data[:,1:].astype(float)
-	times = data[:,0]
-	data[:,0] = [long(dt.datetime.strptime(x, '%Y%m%d%H%M').strftime("%s")) for x in data[:,0].astype(long).astype(str)]		
+	data[:,0] = [int(dt.datetime.strptime(x, '%Y%m%d%H%M').strftime("%s")) for x in times]		
 	return data
 
 def reduce_data(data, r):
