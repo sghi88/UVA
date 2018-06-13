@@ -33,8 +33,7 @@ def read_METEO(filename, fakelines):
 				data.append(newline)
 			i = i + 1
 	data = np.array(data)
-	data = data[:,1:]
-	data = data.astype(float)
+	data = data[:,1:].astype(float)
 	times = data[:,0]
 	data[:,0] = [int(dt.datetime.strptime(x, '%Y%m%d%H%M').strftime("%s")) for x in data[:,0].astype(int).astype(str)]		
 	return data
@@ -53,7 +52,18 @@ def reduce_data(data, r):
 			newline = newline + data[k]
 	return data_red
 
-int(dt.datetime.strptime('01/12/2011', '%d/%m/%Y').strftime("%s"))
+# Esempio di plot con read_METEO
+
+data = read_METEO("order_59817_data.txt", 3)
+time = [dt.datetime.fromtimestamp(ts) for ts in data[:,0]]
+
+fig,ax = plt.subplots() 
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d-%H:%M"))
+plt.xticks(rotation = 25)
+ax.plot(time, data[:,5])
+plt.show()
+
+
 
 '''
 data = read_CSV('OPC2_000.CSV', 16)+read_CSV('OPC2_001.CSV', 16)+read_CSV('OPC2_002.CSV', 16)
