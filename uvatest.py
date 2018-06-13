@@ -31,6 +31,9 @@ def read_METEO(filename, fakelines):
 				newline[1:] = list(map(float, newline[1:]))
 				data.append(newline)
 			i = i + 1
+	data = np.array(data)
+	data = data[:,1:]
+	data = data.astype(float)
 	return data
 
 def reduce_data(data, r):
