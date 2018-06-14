@@ -34,7 +34,7 @@ def read_METEO(filename, fakelines):
 	data = np.array(data)
 	times = data[:,1]
 	data = data[:,1:].astype(float)
-	data[:,0] = [dt.datetime.strptime(x, '%Y%m%d%H%M').strftime("%s") for x in times]		
+	data[:,0] = [time.mktime(dt.datetime.strptime(x, '%Y%m%d%H%M').timetuple()) for x in times]		
 	return data
 
 def reduce_data(data, r):
