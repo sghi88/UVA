@@ -64,7 +64,7 @@ plt.show()
 
 
 
-'''
+"""
 data = read_CSV('OPC2_000.CSV', 16)+read_CSV('OPC2_001.CSV', 16)+read_CSV('OPC2_002.CSV', 16)
 data_red = np.array(reduce_data(data, 630))
 
@@ -178,4 +178,4 @@ plt.savefig("plot5.pdf")
 #####PLOT 5###################
 
 #plt.show()
-'''
+"""
