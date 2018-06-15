@@ -62,7 +62,7 @@ plt.xticks(rotation = 25)
 ax.plot(time, data[:,1])
 plt.show()
 
-print "Vittorio PUZZA"
+print "Vittorio PUZZA" 
 
 
 """
