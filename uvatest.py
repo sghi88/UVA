@@ -28,6 +28,8 @@ def read_METEO(filename, fakelines):
 			if i > fakelines:
 				if row == []:
 					break
+				if ";-;" in row[0]:
+					continue
 				newline = row[0].split(";")
 				data.append(newline)
 			i = i + 1
@@ -53,7 +55,7 @@ def reduce_data(data, r):
 
 # Esempio di plot con read_METEO
 
-data = read_METEO("order_59817_data.txt", 3)
+data = read_METEO("order_59882_data.txt", 3)
 time = [dt.datetime.fromtimestamp(ts) for ts in data[:,0]]
 
 fig,ax = plt.subplots() 
@@ -61,8 +63,6 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d-%H:%M"))
 plt.xticks(rotation = 25)
 ax.plot(time, data[:,1])
 plt.show()
-
-print "Vittorio PUZZA" 
 
 
 """
@@ -183,5 +183,5 @@ plt.xticks(rotation = 25)
 plt.savefig("plot5.pdf")
 #####PLOT 5###################
 #plt.show()
-
+"""
 
