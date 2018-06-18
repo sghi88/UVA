@@ -61,7 +61,7 @@ time = [dt.datetime.fromtimestamp(ts) for ts in data[:,0]]
 fig,ax = plt.subplots() 
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d-%H:%M"))
 plt.xticks(rotation = 25)
-ax.plot(time, data[:,1])
+ax.plot(time, data[:,input("Che colonna vuoi plottare? ")])
 plt.show()
 
 
