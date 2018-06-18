@@ -59,7 +59,7 @@ data = read_METEO("order_59882_data.txt", 3)
 time = [dt.datetime.fromtimestamp(ts) for ts in data[:,0]]
 
 fig,ax = plt.subplots() 
-ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d-%H:%M"))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
 plt.xticks(rotation = 25)
 ax.plot(time, data[:,input("Che colonna vuoi plottare? ")])
 plt.show()
