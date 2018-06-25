@@ -79,7 +79,7 @@ r = 900
 data_red = np.array(reduce_data(data1, r))
 tempo = len(data_red)
 y = range(0, tempo)
-timestamps = now + np.array(y)*1.4*r #600 sec = 15 min
+timestamps = now + np.array(y)*1.4*r
 time1 = [dt.datetime.fromtimestamp(ts) for ts in timestamps]
 
 fig1,ax1 = plt.subplots() 
@@ -87,7 +87,7 @@ ax1.plot(time1, data_red[:,0])
 ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
 plt.xticks(rotation = 25)
 fig2,ax2 = plt.subplots() 
-plt.plot(time2, data2[:,0])
+plt.plot(time2[2:], data2[2:,0])
 ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
 plt.xticks(rotation = 25)
 
