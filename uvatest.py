@@ -75,7 +75,7 @@ data2 = np.array(read_CSV2("Test_Logger0620.CSV",1))
 time2 =  [dt.datetime.fromtimestamp(ts) for ts in data2[:, 19]]
 
 now = data2[0,19]
-r = 900
+r = 2
 data_red = np.array(reduce_data(data1, r))
 tempo = len(data_red)
 y = range(0, tempo)
@@ -86,6 +86,7 @@ fig1,ax1 = plt.subplots()
 ax1.plot(time1, data_red[:,0])
 ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
 plt.xticks(rotation = 25)
+plt.ylim(ymax = 100, ymin = 0)
 fig2,ax2 = plt.subplots() 
 plt.plot(time2[2:], data2[2:,0])
 ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
