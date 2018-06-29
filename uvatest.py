@@ -68,29 +68,35 @@ def reduce_data(data, r):
 			newline = newline + data[k]
 	return data_red
 
+data = np.array(read_CSV("Test_alphasense0620.CSV",16))
+data_red = np.array(reduce_data(data, 1600)) # r che ti da 38 righe
+R = [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 16, 18, 19, 20, 21, 22]
 
-data1 = np.array(read_CSV("Test_alphasense0620.CSV",16))
-data2 = np.array(read_CSV2("Test_Logger0620.CSV",1))
+plt.loglog(R, data_red[1,0:16])
 
-time2 =  [dt.datetime.fromtimestamp(ts) for ts in data2[:, 19]]
+#data1 = np.array(read_CSV("Test_alphasense0620.CSV",16))
+#data2 = np.array(read_CSV2("Test_Logger0620.CSV",1))
 
-now = data2[0,19]
-r = 2
-data_red = np.array(reduce_data(data1, r))
-tempo = len(data_red)
-y = range(0, tempo)
-timestamps = now + np.array(y)*1.4*r
-time1 = [dt.datetime.fromtimestamp(ts) for ts in timestamps]
+#time2 =  [dt.datetime.fromtimestamp(ts) for ts in data2[:, 19]]
 
-fig1,ax1 = plt.subplots() 
-ax1.plot(time1, data_red[:,0])
-ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
-plt.xticks(rotation = 25)
-plt.ylim(ymax = 100, ymin = 0)
-fig2,ax2 = plt.subplots() 
-plt.plot(time2[2:], data2[2:,0])
-ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
-plt.xticks(rotation = 25)
+#now = data2[0,19]
+#r = 2
+#data_red = np.array(reduce_data(data1, r))
+#data_red = data_red[:6437,:]
+#tempo = len(data_red)
+#y = range(0, tempo)
+#timestamps = now + np.array(y)*1.398*r
+#time1 = [dt.datetime.fromtimestamp(ts) for ts in timestamps]
+
+#fig1,ax1 = plt.subplots() 
+#ax1.plot(time1, data_red[:,0])
+#ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
+#plt.xticks(rotation = 25)
+#plt.ylim(ymax = 100, ymin = 0)
+#fig2,ax2 = plt.subplots() 
+#plt.plot(time2[2:], data2[2:,0])
+#ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y/%m/%d \n %H:%M"))
+#plt.xticks(rotation = 25)
 
 # Esempio di plot con read_METEO
 
