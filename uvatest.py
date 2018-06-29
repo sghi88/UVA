@@ -72,7 +72,18 @@ data = np.array(read_CSV("Test_alphasense0620.CSV",16))
 data_red = np.array(reduce_data(data, 1600)) # r che ti da 38 righe
 R = [1, 2, 3, 4, 5, 7, 9, 11, 12, 13, 16, 18, 19, 20, 21, 22]
 
-plt.loglog(R, data_red[1,0:16])
+fig = plt.figure()
+ax = fig.add_subplot(111)
+plt.ion()
+
+fig.show()
+fig.canvas.draw()
+
+for i in range(len(data_red)):
+	ax.clear()
+	plt.loglog(R, data_red[i,0:16])
+	plt.ylim(ymax = 100000, ymin = 1)
+	fig.canvas.draw()
 
 #data1 = np.array(read_CSV("Test_alphasense0620.CSV",16))
 #data2 = np.array(read_CSV2("Test_Logger0620.CSV",1))
@@ -234,6 +245,6 @@ plt.loglog(R, data_red[1,0:16])
 #plt.savefig("plot5.pdf")
 #####PLOT 5###################
 
-plt.show()
+#plt.show()
 
 
