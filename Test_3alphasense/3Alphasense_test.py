@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jul 05 22:10:13 2018
-
 @author: Vittorio
 """
 
@@ -43,22 +42,6 @@ def reduce_data(data, r):
 	return data_red
 
 
-def reduce_data_norm(data, r):
-	data = np.array(data)
-	data_red = []
-	for k in range(len(data)):
-		if k%r == 0:
-			newline = data[k]
-		elif k%r == r-1:
-			newline = newline + data[k]
-			data_red.append(newline)
-			newline[-3:] = newline[-3:]/r   #media
-		else:
-			newline = newline + data[k]
-	return data_red
-
-
-
 data1 = read_CSV('Alpha1_OPC2_000.CSV', 16)+read_CSV('Alpha1_OPC2_001.CSV', 16)
 data2 = read_CSV('Alpha2_OPC2_000.CSV', 16)+read_CSV('Alpha2_OPC2_001.CSV', 16)
 data3 = read_CSV('Alpha3_OPC2_000.CSV', 16)+read_CSV('Alpha3_OPC2_001.CSV', 16)
@@ -74,7 +57,7 @@ for riga in range(len(data2)):
 
 data3=np.array(data3)
 for riga in range(len(data3)):
-    data3[riga,:16]=data3[riga,:16]/(data3[riga,20]**data3[riga,21])
+    data3[riga,:16]=data3[riga,:16]/(data3[riga,20]*data3[riga,21])
 
 
 data_red1 = np.array(reduce_data(data1, 900))
@@ -94,7 +77,7 @@ dates = [dt.datetime.fromtimestamp(ts) for ts in timestamps]
 
 
 
-
+"""
 ###########Log-log taille################
 
 R = [0.46, 0.66, 0.89, 1.15, 1.45, 1.85, 2.55, 3.5, 4.5, 5.75, 7.25, 9, 11, 13, 15, 16.5] #sizeBin taglie in um
@@ -149,19 +132,16 @@ for i in range(len(data_red3)):
 	fig.canvas.draw()
 
 plt.savefig("loglog_tailleAlpha3.pdf")
-
+"""
 ####PLOT 1###################
 """
 data_red_sel = data_red[:, np.arange(10)]
 x = range(1, len(data_red_sel[0])+1)
-
 Z = data_red_sel
 hf = plt.figure()
 ha = hf.add_subplot(111, projection='3d')
-
 X, Y = np.meshgrid(x, y)
 ha.plot_surface(X, Y, Z)
-
 ha.set_xlabel('bin')
 ha.set_ylabel('time')
 ha.set_zlabel('counts/s')
