@@ -162,10 +162,10 @@ ax8 = fig.add_axes([0.1, 0.08, 0.8, 0.11])
 
 ax1.plot(dates, data_red1[:,0], dates, data_red2[:,0], dates, data_red3[:,0] )
 ax1.set_ylabel('size bin 0 [counts/ml]')
-plt.axvline(x=dt.datetime.fromtimestamp(now+19800), color='black') #18:30 + 5:30h
-plt.axvline(x=dt.datetime.fromtimestamp(now+63000), color='black')  #18:30 + 5:30h+12h
-plt.axvline(x=dt.datetime.fromtimestamp(now+106200), color='black') #18:30 + 5:30h+24h
-plt.axvline(x=dt.datetime.fromtimestamp(now+149400), color='black') #18:30 + 5:30h+24h+12h
+ax1.axvline(x=dt.datetime.fromtimestamp(now+19800), color='black') #18:30 + 5:30h
+ax1.axvline(x=dt.datetime.fromtimestamp(now+63000), color='black')  #18:30 + 5:30h+12h
+ax1.axvline(x=dt.datetime.fromtimestamp(now+106200), color='black') #18:30 + 5:30h+24h
+ax1.axvline(x=dt.datetime.fromtimestamp(now+149400), color='black') #18:30 + 5:30h+24h+12h
 
 ax2.plot(dates, data_red1[:,1], dates, data_red2[:,1], dates, data_red3[:,1])
 ax2.set_ylabel('size bin 1 [counts/ml]')
