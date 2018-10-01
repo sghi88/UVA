@@ -82,23 +82,33 @@ def reduce_data(data, r):
 			newline = newline + data[k]
 	return data_red
 
-data = np.array(read_CSV3("S0_0149.CSV",1))
-time = [dt.datetime.fromtimestamp(ts) for ts in data[:,1]]
 
-R = [0.46,0.66,0.89,1.15,1.45,1.85,2.55,3.5,4.5,5.75,7.25,9,11,13,15,16.5]
-fig = plt.figure()
-ax = fig.add_subplot(111)
-plt.ion()
+dati_CSV = np.array(read_CSV3("Correzione_RH/OPC2_000.CSV",16))
+dati_meteo = np.array(read_METEO("Correzione_RH/meteo_11-13juin.txt", 3))
 
-fig.show()
-fig.canvas.draw()
+initial_time = 1533400998 # valore a caso
+time = np.arange(initial_time, initial_time+1.4*len(dati_CSV)-0.1,1.4)
+time= time[:, None]
 
-for i in range(len(data)):
-	ax.clear()
-	plt.title(time[i])
-	plt.loglog(R, data[i,8:24])
-	plt.ylim(ymax = max(data[:,8]), ymin = 0.1)
-	fig.canvas.draw()
+dati_CSV = np.append(time, dati_CSV, axis=1)
+
+#data = np.array(read_CSV3("S0_0149.CSV",1))
+#time = [dt.datetime.fromtimestamp(ts) for ts in data[:,1]]
+
+#R = [0.46,0.66,0.89,1.15,1.45,1.85,2.55,3.5,4.5,5.75,7.25,9,11,13,15,16.5]
+#fig = plt.figure()
+#ax = fig.add_subplot(111)
+#plt.ion()
+
+#fig.show()
+#fig.canvas.draw()
+
+#for i in range(len(data)):
+#	ax.clear()
+#	plt.title(time[i])
+#	plt.loglog(R, data[i,8:24])
+#	plt.ylim(ymax = max(data[:,8]), ymin = 0.1)
+#	fig.canvas.draw()
 
 
 #fig = plt.figure(figsize=(7, 20), dpi=100)
