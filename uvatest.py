@@ -82,15 +82,30 @@ def reduce_data(data, r):
 			newline = newline + data[k]
 	return data_red
 
-
 dati_CSV = np.array(read_CSV3("Correzione_RH/OPC2_000.CSV",16))
 dati_meteo = np.array(read_METEO("Correzione_RH/meteo_11-13juin.txt", 3))
 
 initial_time = 1533400998 # valore a caso
 time = np.arange(initial_time, initial_time+1.4*len(dati_CSV)-0.1,1.4)
-time= time[:, None]
+time = time[:, None]
 
 dati_CSV = np.append(time, dati_CSV, axis=1)
+
+new_HR = np.zeros([len(dati_CSV), 1])
+range_meteo = len(dati_CSV)/429
+
+for i in range(range_meteo):
+	for j in range(429):
+		new_HR[i*429 + j,0] = dati_meteo[i,6] + (dati_meteo[i+1,6]-dati_meteo[i,6])*j/429.
+
+dati_CSV = np.append(dati_CSV, new_HR, axis=1)
+dati_CSV = dati_CSV[:len(dati_CSV)-429,:]
+
+for i in range(len(dati_CSV)):
+	C = (1. + (0.4/1.65)/(-1. + 1/dati_CSV[i, -1]))
+	dati_CSV[i, -4:-1] = dati_CSV[i, -4:-1]/C
+
+#429 
 
 #data = np.array(read_CSV3("S0_0149.CSV",1))
 #time = [dt.datetime.fromtimestamp(ts) for ts in data[:,1]]
