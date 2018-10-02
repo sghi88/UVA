@@ -101,9 +101,12 @@ for i in range(range_meteo):
 dati_CSV = np.append(dati_CSV, new_HR, axis=1)
 dati_CSV = dati_CSV[:len(dati_CSV)-429,:]
 
-for i in range(len(dati_CSV)):
-	C = (1. + (0.4/1.65)/(-1. + 1/dati_CSV[i, -1]))
-	dati_CSV[i, -4:-1] = dati_CSV[i, -4:-1]/C
+# Il codice sotto è la versione estesa di quello che faccio dopo in una linea
+#for i in range(len(dati_CSV)):
+#	C = (1. + (0.4/1.65)/(-1. + 1./dati_CSV[i, -1]))
+#	dati_CSV[i, -4:-1] = dati_CSV[i, -4:-1]/C
+
+dati_CSV[:, -4:-1] = dati_CSV[:, -4:-1]/(1. + (0.4/1.65)/(-1. + 1./np.repeat(dati_CSV[:, -1],3).reshape((len(dati_CSV), 3))))
 
 #429 
 
